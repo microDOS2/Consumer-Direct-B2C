@@ -69,7 +69,14 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-    </style>
+    
+    @media (max-width: 768px) {
+        .flex-col { flex-direction: column !important; }
+        .grid-cols-2 { grid-template-columns: 1fr !important; }
+        .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
+    }
+    
+</style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
