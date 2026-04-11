@@ -175,7 +175,19 @@
         .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
     }
     
+
+        /* Hide YouTube branding */
+        .plyr__video-embed iframe {
+            pointer-events: none;
+        }
+        .plyr--youtube .plyr__control--overlaid {
+            display: none !important;
+        }
+        .plyr__poster {
+            background-size: cover;
+        }
 </style>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 </head>
 <body class="antialiased">
 
@@ -637,11 +649,24 @@
             const dots = document.getElementById('video-dots');
 
             videoData.forEach((d, i) => {
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube.com/embed/${d.videoId}?autoplay=1&mute=1&loop=1&playlist=${d.videoId}&controls=0&modestbranding=1&rel=0`;
-                iframe.className = 'video-iframe opacity-0';
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                const videoContainer = document.createElement('div');
+                videoContainer.className = 'plyr__video-embed video-iframe opacity-0';
+                videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${d.videoId}?autoplay=1&mute=1&loop=1&playlist=${d.videoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3" allow="autoplay; encrypted-media" frameborder="0"></iframe>`;
+
+                // Initialize Plyr on this container
+                setTimeout(() => {
+                    new Plyr(videoContainer, {
+                        controls: [],
+                        clickToPlay: false,
+                        hideControls: true,
+                        youtube: { 
+                            noCookie: true,
+                            rel: 0,
+                            modestbranding: 1,
+                            iv_load_policy: 3
+                        }
+                    });
+                }, 100);
                 container.appendChild(iframe);
                 d.el = iframe;
 
@@ -887,5 +912,6 @@
         initFaqAccordion();
     });
     </script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
 </body>
 </html>
