@@ -176,7 +176,44 @@
     }
     
 
-        /* Hide YouTube branding */
+        
+        /* Hide YouTube branding completely */
+        .plyr__video-embed iframe {
+            pointer-events: none;
+        }
+        .plyr--youtube .plyr__control--overlaid {
+            display: none !important;
+        }
+        .plyr__poster {
+            background-size: cover;
+        }
+        /* Hide YouTube logo and branding */
+        .plyr iframe[src*="youtube"] {
+            pointer-events: none;
+        }
+        /* Hide YouTube player chrome */
+        .plyr--video .plyr__controls {
+            opacity: 0 !important;
+        }
+        /* Force hide all YouTube UI */
+        .plyr__video-embed iframe {
+            border: none !important;
+        }
+        /* Hide YouTube watermark and logo */
+        .ytp-watermark,
+        .ytp-large-play-button,
+        .ytp-youtube-button,
+        .ytp-chrome-top,
+        .ytp-chrome-bottom,
+        .ytp-show-cards-title,
+        .ytp-pause-overlay,
+        .ytp-spinner,
+        .ytp-loader {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
         .plyr__video-embed iframe {
             pointer-events: none;
         }
